@@ -2,11 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import cors from "cors";
+import jwt from "jsonwebtoken";
+
 
 dotenv.config();
-
 const app = express();
 app.use(cors());
 app.use(express.json());
