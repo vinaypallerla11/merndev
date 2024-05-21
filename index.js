@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 
-// Load environment variables from .env file
 dotenv.config();
 
 const app = express();
@@ -47,7 +46,6 @@ const userSchema = new mongoose.Schema({
 
 const userModel = mongoose.model("users", userSchema);
 
-// Authentication middleware
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -63,7 +61,6 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// CREATE API 
 app.post("/getusers/", async (req, res) => {
     try {
         const { username, password, email, phone_number, city } = req.body;
@@ -78,7 +75,6 @@ app.post("/getusers/", async (req, res) => {
     }
 });
 
-// GET API READ ONLY
 app.get("/getusers/", authenticateToken, async (req, res) => {
     try {
         const userData = await userModel.find();
@@ -89,7 +85,6 @@ app.get("/getusers/", authenticateToken, async (req, res) => {
     }
 });
 
-// UPDATE API 
 app.put("/getusers/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -107,7 +102,6 @@ app.put("/getusers/:id", async (req, res) => {
     }
 });
 
-// DELETE API 
 app.delete("/getusers/:id", async (req, res) => {
     try {
         const deletedUser = await userModel.findByIdAndDelete(req.params.id);
@@ -122,7 +116,6 @@ app.delete("/getusers/:id", async (req, res) => {
     }
 });
 
-// REGISTER API
 app.post('/registers/', async (req, res) => {
     try {
         const { username, password, email, mobile } = req.body;
@@ -140,7 +133,6 @@ app.post('/registers/', async (req, res) => {
     }
 });
 
-// Login
 app.post("/login/", async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -162,7 +154,6 @@ app.post("/login/", async (req, res) => {
     }
 });
 
-// Handle uncaught exceptions and unhandled rejections
 process.on('uncaughtException', (err) => {
     console.error('Uncaught Exception:', err);
     process.exit(1);
