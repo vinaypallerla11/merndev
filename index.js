@@ -13,7 +13,7 @@ app.use(express.json());
 
 dotenv.config()
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 6000
 const MONGOURL = process.env.MONGO_URL
 
 mongoose.connect(MONGOURL)
